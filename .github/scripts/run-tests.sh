@@ -29,9 +29,10 @@ print_failed_tests() {
   fi
 }
 
-run_tests action-token-authenticator -Pwildfly-managed
-run_tests action-token-required-action -Pwildfly-managed
+#run_tests action-token-authenticator -Pwildfly-managed
+#run_tests action-token-required-action -Pwildfly-managed
 
+. .github/scripts/export-keycloak-version.sh
 JS_VERSION_OPTION=""
 
 if [ -n "$KEYCLOAK_VERSION" ]; then
@@ -42,38 +43,38 @@ run_tests app-angular2 -Pwildfly-managed "$JS_VERSION_OPTION"
 
 # we need to run authz springboot tests first as they are the only ones relying on manual js-policies deployment
 # other tests deploy (and the removes) the policies automatically which then later removes even the manually deployed ones
-run_tests app-authz-rest-springboot -Pspring-boot
-run_tests app-authz-spring-security -Pspring-boot
-run_tests app-authz-springboot -Pspring-boot
-run_tests app-authz-jee-servlet -Pwildfly-managed
-run_tests app-authz-jee-vanilla -Pwildfly-managed
-run_tests app-authz-photoz -Pwildfly-managed
-run_tests app-authz-rest-employee -Pwildfly-managed
-run_tests app-authz-uma-photoz -Pwildfly-managed
-run_tests app-jee-html5 -Pwildfly-managed
-run_tests app-jee-jsp -Pwildfly-managed
-run_tests app-profile-jee-html5 -Pwildfly-managed
-run_tests app-profile-jee-jsp -Pwildfly-managed
-run_tests app-profile-jee-vanilla -Pwildfly-managed
-run_tests app-profile-saml-jee-jsp -Pwildfly-managed
-run_tests event-listener-sysout -Pkeycloak-remote
-run_tests event-store-mem -Pkeycloak-remote
-run_tests extend-account-console -Pkeycloak-remote
-run_tests fuse63 # no tests but at least let's try to compile it
-run_tests fuse70 # no tests but at least let's try to compile it
-run_tests service-jee-jaxrs -Pwildfly-managed
-run_tests service-springboot-rest -Pspring-boot
-run_tests user-storage-jpa -Pkeycloak-remote
-run_tests user-storage-simple -Pkeycloak-remote
-
-mvn -f service-springboot-rest spring-boot:run >/dev/null&
-run_tests app-springboot -Pspring-boot
-
-# service-nodejs tests
-npm -C service-nodejs install
-npm -C service-nodejs start >/dev/null&
-if ! npm -C service-nodejs test 2>&1 | tee test-logs/service-nodejs.log; then
-  tests_with_errors+=("service-nodejs")
-fi
+#run_tests app-authz-rest-springboot -Pspring-boot
+#run_tests app-authz-spring-security -Pspring-boot
+#run_tests app-authz-springboot -Pspring-boot
+#run_tests app-authz-jee-servlet -Pwildfly-managed
+#run_tests app-authz-jee-vanilla -Pwildfly-managed
+#run_tests app-authz-photoz -Pwildfly-managed
+#run_tests app-authz-rest-employee -Pwildfly-managed
+#run_tests app-authz-uma-photoz -Pwildfly-managed
+#run_tests app-jee-html5 -Pwildfly-managed
+#run_tests app-jee-jsp -Pwildfly-managed
+#run_tests app-profile-jee-html5 -Pwildfly-managed
+#run_tests app-profile-jee-jsp -Pwildfly-managed
+#run_tests app-profile-jee-vanilla -Pwildfly-managed
+#run_tests app-profile-saml-jee-jsp -Pwildfly-managed
+#run_tests event-listener-sysout -Pkeycloak-remote
+#run_tests event-store-mem -Pkeycloak-remote
+#run_tests extend-account-console -Pkeycloak-remote
+#run_tests fuse63 # no tests but at least let's try to compile it
+#run_tests fuse70 # no tests but at least let's try to compile it
+#run_tests service-jee-jaxrs -Pwildfly-managed
+#run_tests service-springboot-rest -Pspring-boot
+#run_tests user-storage-jpa -Pkeycloak-remote
+#run_tests user-storage-simple -Pkeycloak-remote
+#
+#mvn -f service-springboot-rest spring-boot:run >/dev/null&
+#run_tests app-springboot -Pspring-boot
+#
+## service-nodejs tests
+#npm -C service-nodejs install
+#npm -C service-nodejs start >/dev/null&
+#if ! npm -C service-nodejs test 2>&1 | tee test-logs/service-nodejs.log; then
+#  tests_with_errors+=("service-nodejs")
+#fi
 
 print_failed_tests

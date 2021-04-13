@@ -27,14 +27,6 @@ jobs:
       - name: Get Keycloak
         run: .github/scripts/prepare-local-server.sh
 
-      - name: Set Keycloak version
-        run:  .github/scripts/export_keycloak_version.sh
-
-      - name: Build Quickstarts
-        run: |
-          mvn clean install -DskipTests -B
-          cp authz-js-policies/target/authz-js-policies.jar keycloak-dist/standalone/deployments
-
       - name: Start Keycloak
         run: .github/scripts/start-local-server.sh
 

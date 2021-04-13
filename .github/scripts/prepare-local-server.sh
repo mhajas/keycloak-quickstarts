@@ -2,8 +2,8 @@
 
 upstream_master() {
   git clone https://github.com/keycloak/keycloak
-  mvn clean install -Pdistribution -DskipTests -f keycloak -B
-  find keycloak/distribution/server-dist/target -maxdepth 1 -type f -name 'keycloak-[[:digit:]]*.tar.gz' -exec tar xzf {} --strip-components=1 -C keycloak-dist \;
+  #mvn clean install -Pdistribution -DskipTests -f keycloak -B
+  #find keycloak/distribution/server-dist/target -maxdepth 1 -type f -name 'keycloak-[[:digit:]]*.tar.gz' -exec tar xzf {} --strip-components=1 -C keycloak-dist \;
 }
 
 latest_release() {
@@ -22,4 +22,4 @@ else
   echo "Building Keycloak from upstream/master"
   upstream_master
 fi
-keycloak-dist/bin/add-user-keycloak.sh -u admin -p admin
+#keycloak-dist/bin/add-user-keycloak.sh -u admin -p admin

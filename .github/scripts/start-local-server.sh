@@ -22,11 +22,11 @@ function waitForServer {
   done
 }
 
-# GitHub Actions don't preserve file permissions when downloading artifacts
-chmod +x keycloak-dist/bin/standalone.sh
-
-# Start the server
-keycloak-dist/bin/standalone.sh -Djava.net.preferIPv4Stack=true \
-                            -Djboss.socket.binding.port-offset=100 > keycloak.log 2>&1 &
-
-waitForServer
+## GitHub Actions don't preserve file permissions when downloading artifacts
+#chmod +x keycloak-dist/bin/standalone.sh
+#
+## Start the server
+#keycloak-dist/bin/standalone.sh -Djava.net.preferIPv4Stack=true \
+#                            -Djboss.socket.binding.port-offset=100 > keycloak.log 2>&1 &
+#
+#waitForServer
