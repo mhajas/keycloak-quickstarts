@@ -27,6 +27,9 @@ jobs:
       - name: Get Keycloak
         run: .github/scripts/prepare-local-server.sh
 
+      - name: Set Keycloak version
+        run:  .github/scripts/export_keycloak_version.sh
+
       - name: Build Quickstarts
         run: |
           mvn clean install -DskipTests -B
